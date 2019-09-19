@@ -35,52 +35,53 @@ package eecs2030.lab1;
 public class HounsfieldWindow {
 	public int level;
 	public int width;
-	
+
 	public HounsfieldWindow() {
 		this.level = 0;
 		this.width = 400;
 	}
-	
+
 	public HounsfieldWindow(int level, int width) {
-		if((level < Hounsfield.MIN_VALUE) || (level > Hounsfield.MAX_VALUE)) {
+		if ((level < Hounsfield.MIN_VALUE) || (level > Hounsfield.MAX_VALUE)) {
 			throw new IllegalArgumentException();
-		}else if(width < 1) {
+		} else if (width < 1) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		this.level = level;
 		this.width = width;
 	}
-	
+
 	public int getWidth() {
 		return this.width;
 	}
+
 	public int setWidth(int width) {
 		int old = this.width;
-		if(width < 1) {
+		if (width < 1) {
 			throw new IllegalArgumentException();
-		}else {
+		} else {
 			this.width = width;
 		}
-		
+
 		return old;
 	}
-	
+
 	public int getLevel() {
 		return this.level;
 	}
-	
+
 	public int setLevel(int level) {
 		int old = this.level;
-		if((level < Hounsfield.MIN_VALUE) || (level > Hounsfield.MAX_VALUE)) {
+		if ((level < Hounsfield.MIN_VALUE) || (level > Hounsfield.MAX_VALUE)) {
 			throw new IllegalArgumentException();
-		}else {
+		} else {
 			this.level = level;
 		}
-		
+
 		return old;
 	}
-	
+
 	public double map(Hounsfield h) {
 		double v = (double) h.get();
 		double lo = this.level - (this.width / 2.0);
@@ -93,5 +94,5 @@ public class HounsfieldWindow {
 			return (v - lo) / this.width;
 		}
 	}
-	
+
 }

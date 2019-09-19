@@ -10,15 +10,15 @@ package eecs2030.lab1;
  * {@code 0} Hounsfield units. Adjacent tissues in the human body can be
  * distinguished from one another if their radiodensities differ; see
  * <a href="https://en.wikipedia.org/wiki/Hounsfield_scale">the Wikipedia
- * page</a> for a table of typical Hounsfield values for tissues of the
- * human body.
+ * page</a> for a table of typical Hounsfield values for tissues of the human
+ * body.
  * 
  * <p>
  * CT scanners for medical purposes typically restrict the value of reported
  * Hounsfield units to integers in the range {@code -1024} to {@code 3071} so
- * that a Hounsfield unit can be encoded as a 12-bit value. This class uses
- * the values {@code -1024} and {@code 3071} to represent the minimum and
- * maximum, respectively, allowable Hounsfield unit values.
+ * that a Hounsfield unit can be encoded as a 12-bit value. This class uses the
+ * values {@code -1024} and {@code 3071} to represent the minimum and maximum,
+ * respectively, allowable Hounsfield unit values.
  *
  */
 public class Hounsfield {
@@ -29,16 +29,16 @@ public class Hounsfield {
 	private int value;
 
 	/**
-	 * The minimum Hounsfield unit reported by medical CT scanners
-	 * Look up the correct value in the documentation
+	 * The minimum Hounsfield unit reported by medical CT scanners Look up the
+	 * correct value in the documentation
 	 */
 	public static final int MIN_VALUE = -1024;
 
 	/**
-	 * The maximum Hounsfield unit reported by medical CT scanners
-	 * Look up the correct value in the documentation
+	 * The maximum Hounsfield unit reported by medical CT scanners Look up the
+	 * correct value in the documentation
 	 */
-	public static final int MAX_VALUE = 3072;
+	public static final int MAX_VALUE = 3071;
 
 	/**
 	 * Initializes this Hounsfield unit to have a value of zero.
@@ -51,7 +51,7 @@ public class Hounsfield {
 		// Implement the get method before trying to run the JUnit test.
 		// If you used constructor chaining you will also have to implement
 		// the next constructor before running the JUnit test.
-		
+
 		this.value = 0;
 	}
 
@@ -71,8 +71,9 @@ public class Hounsfield {
 		//
 		// Alternatively, implement the checkValue method first and call
 		// it from within this constructor to perform the necessary
-		// input validation, and then assign the appropriate value to this.value 
-		
+		// input validation, and then assign the appropriate value to this.value
+		checkValue(value);
+		this.value = value;
 	}
 
 	/**
@@ -89,20 +90,20 @@ public class Hounsfield {
 
 	/**
 	 * Throws an {@code IllegalArgumentException} if the specified value is less
-	 * than the minimum Hounsfield unit reported by medical CT scanners or
-	 * greater than the maximum Hounsfield unit reported by medical CT scanners.
+	 * than the minimum Hounsfield unit reported by medical CT scanners or greater
+	 * than the maximum Hounsfield unit reported by medical CT scanners.
 	 * 
 	 * @param value
 	 *            a value to check
 	 * @throws IllegalArgumentException
-	 *             if the specified value is less than the minimum Hounsfield
-	 *             unit reported by medical CT scanners or greater than the
-	 *             maximum Hounsfield unit reported by medical CT scanners.
+	 *             if the specified value is less than the minimum Hounsfield unit
+	 *             reported by medical CT scanners or greater than the maximum
+	 *             Hounsfield unit reported by medical CT scanners.
 	 */
 	private static void checkValue(int value) {
 		// This method is useful for implementing the input validation
 		// needed in the constructor and in the method set
-		if((value < MIN_VALUE) || (value > MAX_VALUE)) {
+		if ((value < MIN_VALUE) || (value > MAX_VALUE)) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -114,21 +115,21 @@ public class Hounsfield {
 	 */
 	public int get() {
 		// Change the next line to return the value of this.value
-		
+
 		return this.value;
 	}
 
 	/**
-	 * Sets the value of this Hounsfield unit to the specified value returning
-	 * the value that was overwritten.
+	 * Sets the value of this Hounsfield unit to the specified value returning the
+	 * value that was overwritten.
 	 * 
 	 * @param value
 	 *            the value to set this Hounsfield unit to
 	 * @return the overwritten value of this Hounsfield unit
 	 * @throws IllegalArgumentException
-	 *             if the specified value is less than the minimum Hounsfield
-	 *             unit reported by medical CT scanners or greater than the
-	 *             maximum Hounsfield unit reported by medical CT scanners.
+	 *             if the specified value is less than the minimum Hounsfield unit
+	 *             reported by medical CT scanners or greater than the maximum
+	 *             Hounsfield unit reported by medical CT scanners.
 	 */
 	public int set(int value) {
 		// Call checkValue on the first line to perform input validation
@@ -138,14 +139,14 @@ public class Hounsfield {
 	}
 
 	/**
-	 * Returns a string representation of this Hounsfield unit. The returned
-	 * string is the numeric value of this Hounsfield unit (formatted as an
-	 * integer) followed by a space followed by the string {@code "HU"}.
+	 * Returns a string representation of this Hounsfield unit. The returned string
+	 * is the numeric value of this Hounsfield unit (formatted as an integer)
+	 * followed by a space followed by the string {@code "HU"}.
 	 */
 	@Override
 	public String toString() {
 		// Change the next line to return the approriate string
-		String s = this.value + "HU";
+		String s = this.value + " HU";
 		return s;
 	}
 }

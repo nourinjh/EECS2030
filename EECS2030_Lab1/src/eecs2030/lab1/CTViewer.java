@@ -28,7 +28,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class CTViewer extends JFrame implements ActionListener, WindowListener {
 
 	public class RangeVerifier extends InputVerifier implements ActionListener {
@@ -99,7 +98,7 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 	JTextField levelTextField;
 	JTextField widthTextField;
 	JButton updateButton;
-	
+
 	private JLabel ct;
 
 	private List<Hounsfield> ctData;
@@ -119,7 +118,7 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 		WritableRaster raster = Raster.createWritableRaster(sm, db, null);
 		this.ctImage = new BufferedImage(cm, raster, false, null);
 	}
-	
+
 	private JTextField makeTextField(int min, int max, int value) {
 		JTextField tf = new JTextField(8);
 		tf.setText("" + value);
@@ -157,17 +156,15 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 		// create the panel for the level textfield
 		JPanel levelPanel = new JPanel();
 		levelPanel.setBorder(BorderFactory.createTitledBorder("Window level"));
-		this.levelTextField = makeTextField(Hounsfield.MIN_VALUE, Hounsfield.MAX_VALUE, 
-				this.ctWindow.getLevel());
+		this.levelTextField = makeTextField(Hounsfield.MIN_VALUE, Hounsfield.MAX_VALUE, this.ctWindow.getLevel());
 		levelPanel.add(this.levelTextField);
-		
+
 		// create the panel for the width textfield
 		JPanel widthPanel = new JPanel();
 		widthPanel.setBorder(BorderFactory.createTitledBorder("Window width"));
-		this.widthTextField = makeTextField(0, Hounsfield.MAX_VALUE - Hounsfield.MIN_VALUE, 
-				this.ctWindow.getWidth());
+		this.widthTextField = makeTextField(0, Hounsfield.MAX_VALUE - Hounsfield.MIN_VALUE, this.ctWindow.getWidth());
 		widthPanel.add(this.widthTextField);
-		
+
 		// create the panel for the update button
 		JPanel updatePanel = new JPanel();
 		updatePanel.setBorder(BorderFactory.createTitledBorder("Update"));
@@ -175,7 +172,7 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 		this.updateButton.setActionCommand("UPDATE");
 		this.updateButton.addActionListener(this);
 		updatePanel.add(this.updateButton);
-		
+
 		// Create the label that displays the ct image
 		this.ct = new JLabel();
 		this.ct.setIcon(new ImageIcon(this.ctImage));
@@ -231,16 +228,14 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 				File file = fc.getSelectedFile();
 				this.readCT(file);
 			}
-		}
-		else if (e.getSource() == this.updateButton) {
+		} else if (e.getSource() == this.updateButton) {
 			try {
 				int level = Integer.parseInt(this.levelTextField.getText());
 				int width = Integer.parseInt(this.widthTextField.getText());
 				this.ctWindow.setLevel(level);
 				this.ctWindow.setWidth(width);
 				this.updateImage();
-			}
-			catch (NumberFormatException ex) {
+			} catch (NumberFormatException ex) {
 				// ignore
 			}
 		}
@@ -291,8 +286,8 @@ public class CTViewer extends JFrame implements ActionListener, WindowListener {
 	}
 
 	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event-dispatching thread.
+	 * Create the GUI and show it. For thread safety, this method should be invoked
+	 * from the event-dispatching thread.
 	 */
 	private static void createAndShowGUI() {
 		// Create and set up the window.

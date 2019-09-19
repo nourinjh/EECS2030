@@ -11,7 +11,7 @@ import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HounsfieldWindowTest {
-	
+
 	private static boolean IS_NO_ARG_CTOR_OK = false;
 	private static boolean IS_CTOR_OK = false;
 
@@ -99,7 +99,7 @@ public class HounsfieldWindowTest {
 	@Test
 	public void test05_setLevel() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow()", IS_NO_ARG_CTOR_OK);
-		
+
 		// make a window to modify
 		int expOldLevel = 0;
 		final int expWidth = 400;
@@ -141,7 +141,7 @@ public class HounsfieldWindowTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test06_setLevelThrows() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow()", IS_NO_ARG_CTOR_OK);
-		
+
 		// make a window to call set on
 		HounsfieldWindow w = new HounsfieldWindow();
 
@@ -157,7 +157,7 @@ public class HounsfieldWindowTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test07_setLevelThrows() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow()", IS_NO_ARG_CTOR_OK);
-		
+
 		// make a window to call set on
 		HounsfieldWindow w = new HounsfieldWindow();
 
@@ -173,7 +173,7 @@ public class HounsfieldWindowTest {
 	@Test
 	public void test08_setWidth() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow(int, int)", IS_CTOR_OK);
-		
+
 		// make a window to modify
 		final int expLevel = 10;
 		int expOldWidth = 125;
@@ -215,7 +215,7 @@ public class HounsfieldWindowTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test09_setWidthThrows() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow()", IS_NO_ARG_CTOR_OK);
-		
+
 		// make a window to call set on
 		HounsfieldWindow w = new HounsfieldWindow();
 
@@ -231,7 +231,7 @@ public class HounsfieldWindowTest {
 	@Test
 	public void test10_map() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow(int, int)", IS_CTOR_OK);
-		
+
 		// uses windows of width 1
 		// easy to test because map should always return 0.5 for
 		// Hounsfield values inside the window
@@ -260,44 +260,43 @@ public class HounsfieldWindowTest {
 		for (int i = 0; i < n; i++) {
 			if (winWidth % 2 == 0) {
 				result[i] = (0.0 + i) / winWidth;
-			}
-			else {
+			} else {
 				result[i] = (1.0 + 2 * i) / (2 * winWidth);
 			}
 		}
 		return result;
 	}
-	
+
 	@Test
 	public void test11_map() {
 		assumeTrue("test requires a correct implementation of HounsfieldWindow(int, int)", IS_CTOR_OK);
-		
+
 		// tests Hounsfield units in windows of various widths and levels
-		final int[] WIDTH = {2, 3, 4, 5, 10, 25, 50, 75, 100, 255};
-		final int[] LEVEL = {-800, -1, 1, 750};
-		
+		final int[] WIDTH = { 2, 3, 4, 5, 10, 25, 50, 75, 100, 255 };
+		final int[] LEVEL = { -800, -1, 1, 750 };
+
 		for (int level : LEVEL) {
 			for (int width : WIDTH) {
 				// make a window to call map on
 				HounsfieldWindow w = new HounsfieldWindow(level, width);
-				
-				// expected values map should return 
+
+				// expected values map should return
 				double[] EXP = HounsfieldWindowTest.mapValues(width);
-				
+
 				for (int i = 0; i < EXP.length; i++) {
 					// Hounsfield unit to map
 					Hounsfield h = new Hounsfield(level - width / 2 + i);
-					
+
 					// the expected return value of map(h)
 					double exp = EXP[i];
-					
+
 					// the actual value returned by map(h)
 					double got = w.map(h);
-					
+
 					// make an error message in case the test fails
 					String error = String.format(
-							"map(%s) failed to return the correct value for a window with level %s, width %s", h.get(), level,
-							width);
+							"map(%s) failed to return the correct value for a window with level %s, width %s", h.get(),
+							level, width);
 
 					// assert that exp equals got
 					assertEquals(error, exp, got, 1e-9);
