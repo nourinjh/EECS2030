@@ -306,12 +306,20 @@ public final class Complex {
 		// is stored as the second element of parts
 		// -once you account for the sign, you can return the correct
 		// complex number
-		
+		try {
+			double real = Double.parseDouble(parts.get(0));
+			char sign = parts.get(1).charAt(0);
+			double imag = Double.parseDouble(parts.get(2).substring(0, parts.get(2).length() - 1));
+			if (sign == '+')
+				result = new Complex(real, imag);
+			else if (sign == '-')
+				result = new Complex(real, -1 * imag);
+			else
+				throw new IllegalArgumentException();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		}
 
-		
-		
-			
-	
 		return result;
 	}
 
