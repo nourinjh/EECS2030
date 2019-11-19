@@ -33,6 +33,7 @@ public class ExpressionCollector {
 	 */
 	void addExpression(Expression e) { 
 		/* Your Task */
+		this.myExpression.add(e);
 		
 	}
 
@@ -46,6 +47,19 @@ public class ExpressionCollector {
 		/* Your Task */
 		// Hint: Depending on the operator given (e.g., +), create the corresponding expression object
 		// (e.g., Addition) and add it to the collector.
+		if(op.equals("+")) {
+			this.myExpression.add(new Addition(left, right));
+		}else if(op.equals("-")) {
+			this.myExpression.add(new Subtraction(left, right));
+		}else if(op.equals("*")) {
+			this.myExpression.add(new Multiplication(left, right));
+		}else if(op.equals("==")) {
+			this.myExpression.add(new Equal(left, right));
+		}else if(op.equals(">")) {
+			this.myExpression.add(new GreaterThan(left, right));
+		}else if(op.equals("<")) {
+			this.myExpression.add(new LessThan(left, right));
+		}
 	}
 
 	/**
@@ -57,7 +71,16 @@ public class ExpressionCollector {
 	 */
 	boolean isTypeCorrect() {
 		/* Your Task */
-		return false;
+		if(this.myExpression.size() == 0) {
+			return true;
+		}
+		Expression temp = this.myExpression.get(0);
+		for(Expression exp: this.myExpression) {
+			if(exp.value.getClass() != temp.value.getClass()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -75,7 +98,7 @@ public class ExpressionCollector {
 	 */
 	Object getValue() {
 		/* Your Task */
-		return null;
+		return this.value;
 	}
 	
 	/**
@@ -84,7 +107,15 @@ public class ExpressionCollector {
 	 */
 	Expression[] getExpressions() {
 		/* Your Task */
-		return null;
+		if(this.myExpression.size() == 0) {
+			return new Expression[0];
+		}
+		
+		Expression[] temp = new Expression[this.myExpression.size()];
+		for(int i = 0; i < temp.length; i++) {
+			temp[i] = this.myExpression.get(i);
+		}
+		return temp;
 	}
 
 	/**
@@ -95,6 +126,20 @@ public class ExpressionCollector {
 	@Override
 	public boolean equals(Object obj) {
 		/* Your Task */
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null) {
+			return false;
+		}
+		if(this.getClass() != obj.getClass()) {
+			return false;
+		}
+		ExpressionCollector other = (ExpressionCollector) obj;
+		if(this.isTypeCorrect() && other.isTypeCorrect() && this.getValue() == other.getValue()) {
+			return true;
+		}
+		
 		return false;
 	}
 }
