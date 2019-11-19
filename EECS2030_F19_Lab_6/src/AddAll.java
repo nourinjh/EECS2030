@@ -1,13 +1,10 @@
 
 public class AddAll extends ExpressionCollector {
-	AddAll(){
-		super();
-	}
-	
+
 	@Override
 	void evaluate() {
 		Integer sum = 0;
-		for(Expression exp: this.myExpression) {
+		for (Expression exp : this.myExpression) {
 			exp.evaluate();
 			sum += (Integer) exp.getValue();
 		}
